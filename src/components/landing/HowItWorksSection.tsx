@@ -4,7 +4,7 @@ import { Transition } from "@/components/ui/transition";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { CheckCircle } from "lucide-react";
 
-export default function HeroSection() {
+export default function HowItWorksSection() {
   return (
     <section className="relative py-24 px-6 lg:px-12">
       <motion.div

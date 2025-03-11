@@ -1,73 +1,34 @@
+import React from "react";
+import { motion } from "framer-motion";
+import { Transition } from "@/components/ui/transition";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { CheckCircle } from "lucide-react";
 
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { LogIn, Menu, Home } from 'lucide-react';
-
-interface NavbarProps {
-  toggleSidebar?: () => void;
-  isAuthenticated?: boolean;
-}
-
-export function Navbar({ toggleSidebar, isAuthenticated = false }: NavbarProps) {
-  const location = useLocation();
-  const isLandingPage = location.pathname === '/';
-  const isProjectView = location.pathname.startsWith('/projects/');
-  
+export default function Navbar() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border px-4 lg:px-8 py-4 transition-all duration-300">
-      <div className="flex justify-between items-center mx-auto max-w-7xl">
-        <div className="flex items-center gap-4">
-          {!isLandingPage && isAuthenticated && (
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="md:hidden" 
-              onClick={toggleSidebar}
-              aria-label="Toggle sidebar"
-            >
-              <Menu className="h-5 w-5" />
-            </Button>
-          )}
-          <Link 
-            to="/" 
-            className="flex items-center gap-2"
-          >
-            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold">NS</span>
+    <nav className="bg-white shadow-lg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          <div className="flex">
+            <div className="flex-shrink-0 flex items-center">
+              <img className="block lg:hidden h-8 w-auto" src="/logo-mobile.svg" alt="FootPol Ekstra" />
+              <img className="hidden lg:block h-8 w-auto" src="/logo.svg" alt="FootPol Ekstra" />
             </div>
-            <span className="font-medium">NeuriStartup</span>
-          </Link>
-        </div>
-        
-        <div className="flex items-center gap-2">
-          {isLandingPage || !isAuthenticated ? (
-            <Link to="/login">
-              <Button className="flex items-center gap-2">
-                <LogIn className="h-4 w-4" />
-                <span>Login</span>
-              </Button>
-            </Link>
-          ) : (
-            <>
-              {isProjectView && (
-                <Link to="/" className="mr-4">
-                  <Button variant="outline" size="sm" className="flex items-center gap-2">
-                    <Home className="h-4 w-4" />
-                    <span>Landing Page</span>
-                  </Button>
-                </Link>
-              )}
-              <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center cursor-pointer">
-                <span className="text-primary-foreground font-medium">U</span>
-              </div>
-            </>
-          )}
+          </div>
+          <div className="flex items-center">
+            <div className="hidden lg:block">
+              <a href="#" className="ml-10 mr-4 font-medium text-gray-900 hover:text-gray-900">Home</a>
+              <a href="#" className="mr-4 font-medium text-gray-900 hover:text-gray-900">About</a>
+              <a href="#" className="font-medium text-gray-900 hover:text-gray-900">Contact</a>
+            </div>
+            <button className="lg:hidden flex-shrink-0 p-2 rounded-md hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300">
+              <svg className="h-6 w-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
-    </header>
+    </nav>
   );
 }
-
-export default Navbar;
